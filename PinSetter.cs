@@ -16,32 +16,21 @@ public class PinSetter : MonoBehaviour {
     private int lastSettledCount = 10;  
     private ball ball;
     private Animator ani;
+    private PinCounter pinCounter;
 
     ActionMaster actionMaster = new ActionMaster( ); // This needs to be here so there is only one consistent instance.
 
     private void Start( )
     {
-        standingDisplay.text = CountStanding( ).ToString( );
+        pinCounter = FindObjectOfType<PinCounter>( );
+        standingDisplay.text = pinCounter.PinCount( ).ToString( );
         ball = GameObject.FindObjectOfType<ball>( );
         ani = GetComponent<Animator>( );
     } 
 
-    int CountStanding( )
-    {
-        int pinCount = 0;
-        foreach (Pin pin in GameObject.FindObjectsOfType<Pin>())
-        {
-            if (pin.IsStanding())
-            {
-                pinCount++;
-            }
-        }
-        return pinCount;
-    }
-
 	// Update is called once per frame
 	void Update () {
-        standingDisplay.text = CountStanding( ).ToString( );
+        standingDisplay.text = pinCounter.PinCount( ).ToString( );
 
         if (ballLeftBox)
         {
@@ -51,12 +40,12 @@ public class PinSetter : MonoBehaviour {
 
     void UpdateStandingCountAndSettle( )
     {
-        int currentStanding = CountStanding( );
+        int currentStanding = pinCounter.PinCount( );
 
         if (currentStanding != lastStandingCount)
         {
             lastChangeTime = Time.time;
-            lastStandingCount = CountStanding( );
+            lastStandingCount = pinCounter.PinCount( );
         }
 
         if (lastChangeTime <= (Time.time - 3f)) // Checks that the lastChangeTime was over 3s ago.
@@ -67,7 +56,7 @@ public class PinSetter : MonoBehaviour {
 
     void PinsHaveSettled( )
     {
-        int standing = CountStanding( );
+        int standing = pinCounter.PinCount( );
         int pinFall = lastSettledCount - standing;
         lastSettledCount = standing;
 

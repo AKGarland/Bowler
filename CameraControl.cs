@@ -14,7 +14,6 @@ public class CameraControl : MonoBehaviour {
 
         // Find distance between camera and ball on Start
         offset = transform.position - ball.transform.position;
-        print(offset);
 	}
 	
 	void Update () {
