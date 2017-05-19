@@ -6,7 +6,7 @@ public class ActionMaster { // Removed Monobehaviour as this is our own plain cl
     public enum Action {Tidy, Reset, EndTurn, EndGame};
 
     private int[] bowls = new int[21];
-    private int bowl = 1;
+    public int bowl = 1;
 
     public Action Bowl (int pins)
     {
