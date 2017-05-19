@@ -1,18 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ActionMaster { // Removed Monobehaviour as this is our own plain class
     public enum Action {Tidy, Reset, EndTurn, EndGame};
 
     private int[] bowls = new int[21];
-    private int bowl = 1;
+    public int bowl = 1;
 
-    public Action Bowl (int pins)
+    public Action Bowl (List<int> pins)
     {
-        if (pins < 0 || pins > 10) {throw new UnityException("Invalid pins.");}
+        int latestBowl = pins.ElementAt(pins.Count - 1);
+        if (latestBowl < 0 || latestBowl > 10) {throw new UnityException("Invalid pins.");}
 
-        bowls[bowl - 1] = pins;
+        bowls[bowl - 1] = latestBowl;
 
        if (bowl == 21) // if bowls 19 + 20 does not come to "10" then game is over.
         {
@@ -41,7 +43,7 @@ public class ActionMaster { // Removed Monobehaviour as this is our own plain cl
 
         if (bowl % 2 != 0)  // If bowl is an odd number it must be the first bowl of the frame 
         {
-            if (pins == 10 && bowl < 19)
+            if (latestBowl == 10 && bowl < 19)
             {
                 bowl += 2;
                 return Action.EndTurn;

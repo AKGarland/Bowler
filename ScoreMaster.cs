@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Linq;
 
 public class ScoreMaster {
 
@@ -8,7 +10,7 @@ public class ScoreMaster {
     {
         List<int> frameList = new List<int>( );
 
-        // Code here
+        frameList.Add(rolls.ElementAt(rolls.Count-1));
 
         return frameList;
     }
