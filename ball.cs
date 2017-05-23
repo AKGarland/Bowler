@@ -30,13 +30,14 @@ public class ball : MonoBehaviour
     }
 
     void Update () {
-        posX = Mathf.Clamp(transform.position.x, -52.5f, 52.5f);
+        posX = Mathf.Clamp(transform.position.x, -60f, 60f);
         transform.position = new Vector3(posX, transform.position.y, transform.position.z);
     }
 
     public void Reset( )
     {
         transform.position = startPos;
+        transform.rotation = Quaternion.identity;
         rigidBody.velocity = Vector3.zero;
         rigidBody.angularVelocity = Vector3.zero;
         rigidBody.useGravity = false;
