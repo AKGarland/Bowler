@@ -61,4 +61,29 @@ public class ScoreDisplayTest
         string rollsString = "1/";
         Assert.AreEqual(rollsString, ScoreDisplay.FormatRolls(rolls.ToList( )));
     }
+
+    [Test]
+    public void T07BowlStrikeinLastFrame( )
+    {
+        int[] rolls = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 10, 1, 1 };
+        string rollsString = "111111111111111111X11";
+        Assert.AreEqual(rollsString, ScoreDisplay.FormatRolls(rolls.ToList( )));
+    }
+
+    [Test]
+    public void T08BowlStrikeOnSecondBowl( )
+    {
+        int[] rolls = { 0, 10, 3, 4 };
+        string rollsString = "-X34";
+        Assert.AreEqual(rollsString, ScoreDisplay.FormatRolls(rolls.ToList( )));
+    }
+
+    [Category("Verification")]
+    [Test]
+    public void TG01GoldenCopyB1of3( )
+    {
+        int[] rolls = { 10, 9, 1, 9, 1, 9, 1, 9, 1, 7, 0, 9, 0, 10, 8, 2, 8, 2, 10 };
+        string rollsString = "X 9/9/9/9/7-9-X 8/8/X";
+        Assert.AreEqual(rollsString, ScoreDisplay.FormatRolls(rolls.ToList( )));
+    }
 }

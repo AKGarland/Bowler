@@ -39,28 +39,31 @@ public class ScoreDisplay : MonoBehaviour {
 
     public static string FormatRolls(List<int> rolls){
         string output = "";
-        var rollList = new List<string>( );
-        for (int i = 0; i < rolls.Count; i++) {
 
-            if (i==21){
-                rollList.Add(rolls[i].ToString( ));
+        for (int i = 0; i < rolls.Count; i++) {
+            int miniFrame = output.Length + 1;
+
+            if (rolls[i] == 0)
+            {  //display "-" in place of a "0"
+                output+="-";
             }
-            if (rolls[i] == 10) { //if this first bowl is a 10 display X
-                rollList.Add("X");
-                if (i % 2 == 0 && (i < 18 )) {
-                    rollList.Add(" ");
-                }
-            } else if (rolls[i] == 0){ //display "-" in place of a "0"
-                rollList.Add("-");
-            } else {
-                if (i%2==1 && (rolls[i - 1] + rolls[i] == 10)) {
-                    rollList.Add("/");
-                } else {
-                    rollList.Add(rolls[i].ToString( ));
-                }
+            else if (miniFrame % 2 == 0 && (rolls[i - 1] + rolls[i] == 10)) // Spare 
+            {
+                output += "/";
+            }
+            else if (miniFrame >= 19 && rolls[i] == 10)
+            {
+                output += "X";
+            }
+            else if (rolls[i] == 10)
+            {
+                output += "X ";
+            }
+            else
+            {
+                output += rolls[i].ToString( );
             }
         }
-        output = string.Join("",rollList.ToArray());
         return output;
     }
 }
