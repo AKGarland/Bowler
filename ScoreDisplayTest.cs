@@ -74,7 +74,7 @@ public class ScoreDisplayTest
     public void T08BowlStrikeOnSecondBowl( )
     {
         int[] rolls = { 0, 10, 3, 4 };
-        string rollsString = "-X34";
+        string rollsString = "-/34";
         Assert.AreEqual(rollsString, ScoreDisplay.FormatRolls(rolls.ToList( )));
     }
 
@@ -86,4 +86,14 @@ public class ScoreDisplayTest
         string rollsString = "X 9/9/9/9/7-9-X 8/8/X";
         Assert.AreEqual(rollsString, ScoreDisplay.FormatRolls(rolls.ToList( )));
     }
+
+    	// http://brownswick.com/wp-content/uploads/2012/06/OpenBowlingScores-6-12-12.jpg
+ 	[Category("Verification")]
+ 	[Test]
+ 	public void TG05GoldenCopyC2of3( )
+    {
+        int[] rolls = {10, 10, 10, 10, 9,0, 10, 10, 10, 10, 10,9,1};
+        string rollsString = "X X X X 9-X X X X X9/";
+        Assert.AreEqual(rollsString, ScoreDisplay.FormatRolls(rolls.ToList( )));
+          }
 }

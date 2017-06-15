@@ -10,38 +10,29 @@ public class PinSetter : MonoBehaviour {
     public GameObject pinSet;
 
     private Animator ani;
-    private GameManager gameManager;
     private PinCounter pinCounter;
-
-    ActionMaster actionMaster = new ActionMaster( ); // This needs to be here so there is only one consistent instance;
 
     private void Start( )
     {
         ani = GetComponent<Animator>( );
-        gameManager = FindObjectOfType<GameManager>( );
         pinCounter = FindObjectOfType<PinCounter>( );
     } 
 
-	// Update is called once per frame;
-	void Update () {
-        
-    }
-
     public void ActionDecision(ActionMaster.Action action)
     {
-        switch (action)
+        switch (action) // RaisePins(), LowerPins(), & RenewPins() are called by the animator 
         {
             case ActionMaster.Action.Tidy:
-                ani.SetTrigger("tidyTrigger");
+                ani.SetTrigger("tidyTrigger"); // RaisePins, the sweeper object wipes away fallen pins, LowerPins()
                 break;
             case ActionMaster.Action.EndTurn:
-                ani.SetTrigger("resetTrigger");
+                ani.SetTrigger("resetTrigger"); // The sweeper pushes all pins out of the boundary which destroys them & RenewPins()
                 pinCounter.LastSettledCount(10);
                 break;
             case ActionMaster.Action.EndGame:
-                throw new UnityException("Don't know how to handle end game yet.");
+                throw new UnityException("Don't know how to handle end game yet.");  // This exception should only be thrown now if something goes very wrong
             case ActionMaster.Action.Reset:
-                ani.SetTrigger("resetTrigger");
+                ani.SetTrigger("resetTrigger"); 
                 pinCounter.LastSettledCount(10);
                 break;
         }
@@ -66,6 +57,6 @@ public class PinSetter : MonoBehaviour {
     public void RenewPins( )
     {
         GameObject newPins = Instantiate(pinSet);
-        newPins.transform.position += new Vector3(0, 7f,0);
+        newPins.transform.position += new Vector3(0, 0,0);
     }
 }

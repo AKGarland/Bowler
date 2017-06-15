@@ -8,20 +8,6 @@ using System.Linq;
 [TestFixture]
 public class ScoreMasterTest
 {
-    private ActionMaster actionMaster;
-    private ActionMaster.Action endTurn = ActionMaster.Action.EndTurn;
-    private ActionMaster.Action tidy = ActionMaster.Action.Tidy;
-    private ActionMaster.Action endGame = ActionMaster.Action.EndGame;
-    private ActionMaster.Action reset = ActionMaster.Action.Reset;
-    private ScoreMaster scoreMaster;
-
-    [SetUp]
-    public void Setup( )
-    {
-        ActionMaster actionMaster = new ActionMaster( );
-        ScoreMaster scoreMaster = new ScoreMaster( );
-    }
-
     [Test]
     public void T0135Displays8( )
     {

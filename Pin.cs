@@ -9,21 +9,17 @@ public class Pin : MonoBehaviour {
 
     private Rigidbody rigidBody;
 
-    // Use this for initialization
     void Start () {
         rigidBody = GetComponent<Rigidbody>( );
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
 	}
 
     public bool IsStanding( )
     {
+        // The pins are imported from blender on their side so "upright" is actually 90 degrees.
         float tiltInX = (transform.eulerAngles.x < 90f) ? transform.eulerAngles.x : 270 - transform.eulerAngles.x;
         float tiltInZ = (transform.eulerAngles.z < 180f) ? transform.eulerAngles.z : 360 - transform.eulerAngles.z;
 
+        // standingThreshold to tweak in Inspector
         if (tiltInX > standingThreshold || tiltInZ > standingThreshold)
         { 
             return false;
@@ -36,11 +32,11 @@ public class Pin : MonoBehaviour {
 
     public void Raise( )
     {
-        // Raise standing pins only by distanceToRaise
+        // Raise standing pins only by distToRaise (tuned in Inspector), rotation figure due to Blender import offset
         if (IsStanding( ))
         {
             rigidBody.useGravity = false;
-            transform.rotation = Quaternion.Euler( 270,0,0);
+            transform.rotation = Quaternion.Euler(270f,0,0);
             transform.Translate(new Vector3(0f,distToRaise,0f), Space.World) ;
             transform.rotation = Quaternion.Euler(270f, 0, 0);
         }
@@ -48,8 +44,8 @@ public class Pin : MonoBehaviour {
 
     public void Lower( )
     {
-        // Returns pins to floor
-        transform.position -= Vector3.up * distToRaise;
+        // Returns pins to floor level 
         rigidBody.useGravity = true;
+        transform.position -= Vector3.up * distToRaise;
     }
 }

@@ -13,7 +13,11 @@ public class DragLaunch : MonoBehaviour {
 	void Start () {
         ball = GetComponent<ball>( );
 	}
-	
+
+    private void Update( )
+    {
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -50f, 50f), transform.position.y, transform.position.z);
+    }
     public void DragStart( )
     {
         if (!ball.inPlay)
@@ -44,7 +48,7 @@ public class DragLaunch : MonoBehaviour {
     {
         if (!ball.inPlay)
         {
-            ball.transform.Translate(new Vector3(xNudge,0,0));
-        }
+            ball.transform.Translate(new Vector3(xNudge, 0, 0));
+                    }
     }
 }

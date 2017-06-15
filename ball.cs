@@ -6,6 +6,8 @@ public class ball : MonoBehaviour
 {
     public Vector3 intialVelocity;
     public bool inPlay = false;
+    public bool bumper = false;
+    public GameObject bumpToggle;
 
     private Rigidbody rigidBody;
     private AudioSource audioSource;
@@ -30,8 +32,15 @@ public class ball : MonoBehaviour
     }
 
     void Update () {
-        posX = Mathf.Clamp(transform.position.x, -60f, 60f);
-        transform.position = new Vector3(posX, transform.position.y, transform.position.z);
+        if (bumper == true)
+        {
+            posX = Mathf.Clamp(transform.position.x, -60f, 60f);  // This provides a bumper effect -- toggled in Options menu using PlayerPrefs instead of current bool
+            transform.position = new Vector3(posX, transform.position.y, transform.position.z);
+        }
+        else
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        }
     }
 
     public void Reset( )
@@ -42,5 +51,16 @@ public class ball : MonoBehaviour
         rigidBody.angularVelocity = Vector3.zero;
         rigidBody.useGravity = false;
         inPlay = false;
+    }
+
+    public void BumperToggle( )
+    {
+        bumper = !bumper;
+        if (bumper) { bumpToggle.SetActive(true);
+        }
+        else
+        {
+            bumpToggle.SetActive(false);
+        }
     }
 }

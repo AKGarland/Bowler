@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
     private PinSetter pinSetter;
     private ScoreDisplay scoreDisplay;
 
-    ActionMaster actionMaster = new ActionMaster( );
+    //ActionMaster actionMaster = new ActionMaster( );
     List<int> rolls = new List<int>( );
 
     void Start( ) {
@@ -39,13 +39,14 @@ public class GameManager : MonoBehaviour {
 
             pinSetter.ActionDecision(ActionMaster.NextAction(rolls));
             Debug.Log(" " + rolls.ElementAt(rolls.Count - 1));
-            scoreDisplay.FillRollCard(rolls);
+            scoreDisplay.FillRolls(rolls);
             ball.Reset( );
         } catch { Debug.LogWarning("Something went wrong in Bowl()"); }
 
         try
         {
-            scoreDisplay.TotalScore(ScoreMaster.ScoreCumulative(rolls));
+            scoreDisplay.FillRolls(rolls);
+            scoreDisplay.FillFrames(ScoreMaster.ScoreCumulative(rolls));
         }
         catch { Debug.LogWarning("Something went wrong in scoring"); }
     }

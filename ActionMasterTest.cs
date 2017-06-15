@@ -8,7 +8,7 @@ using System.Linq;
 [TestFixture]
 public class ActionMasterTest
 {
-    private ActionMaster actionMaster;
+    //private ActionMaster actionMaster;
     private ActionMaster.Action endTurn = ActionMaster.Action.EndTurn;
     private ActionMaster.Action tidy = ActionMaster.Action.Tidy;
     private ActionMaster.Action endGame = ActionMaster.Action.EndGame;
